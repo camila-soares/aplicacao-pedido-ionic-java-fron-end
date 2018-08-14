@@ -14,17 +14,23 @@ export class MyApp {
 
   pages: Array<{title: string, component: string}>;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+    this.initializeApp();
+
+    this.pages = [
+      { title: 'Profile', component: 'ProfilePage' },
+      { title: 'Categorias', component: 'CategoriasPage' }
+    ]
     
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-      
-    });
   }
 
+  initializeApp(){
+    this.platform.ready().then(() => {
+
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    })
+  }
  
   openPage(page){
     this.nav.setRoot(page.Component);
