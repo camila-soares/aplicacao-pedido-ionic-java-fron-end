@@ -1,6 +1,6 @@
 import { Injectable} from '@angular/core';
 import { CredenciaisDTO } from '../models/credenciais.dto';
-import { HttpClient, HttpResponse } from '../../node_modules/@angular/common/http';
+import { HttpClient } from '../../node_modules/@angular/common/http';
 import { API_CONFIG } from '../config/api.config';
 import { LocalUser } from '../models/local_user';
 import { StorageService } from './Storage.service';
@@ -13,7 +13,7 @@ export class AuthService {
     constructor(public http: HttpClient, public storage: StorageService){
 
     }
-    private readonly newProperty = 'string';
+    //private readonly newProperty = 'string';
 
     authenticate(creds: CredenciaisDTO){
        return this.http.post(
