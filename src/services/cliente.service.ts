@@ -1,5 +1,5 @@
 import { Injectable } from "../../node_modules/@angular/core";
-import { HttpClient, HttpHeaders } from "../../node_modules/@angular/common/http";
+import { HttpClient } from "../../node_modules/@angular/common/http";
 import { Observable } from "../../node_modules/rxjs/Rx";
 import { API_CONFIG } from "../config/api.config";
 import { StorageService } from "./Storage.service";
