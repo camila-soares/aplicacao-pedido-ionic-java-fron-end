@@ -25,6 +25,16 @@ export class AuthService {
             });
     }
 
+    refreshToken(){
+        return this.http.post(
+             `${API_CONFIG.baseUrl}/auth/refresh_token`,
+              {},
+             {
+                 observe: 'response',
+                 responseType:'text'
+             });
+     }
+
     successfullLogin(authrizationValue : string){
         let tok = authrizationValue.substring(7);
         let user: LocalUser = {
@@ -37,4 +47,6 @@ export class AuthService {
     logout(){
         this.storage.setLocalUser(null);
     }
+
+    
 }
