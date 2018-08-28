@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HTTP_INTERCEPTORS,} from '../../node_modules/@angular/common/http';
 import { Observable } from 'rxjs/Rx';//IMPORTEANTE: IMPORT ATUALIZADO
 import { StorageService } from '../services/Storage.service';
-
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-constructor(public storage:StorageService){}
+constructor(public storage:StorageService, public alertCtrl: AlertController){}
+
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log('passou');
         return next.handle(req)
@@ -23,9 +24,17 @@ constructor(public storage:StorageService){}
             console.log(errorObj);
 
             switch(errorObj.status){
-                case 403:
-                this.handle403();
+                case 401:
+                this.handle401();
                 break;
+
+                case 403:
+                this.handle403(errorObj);
+                break;
+
+                default:
+                this.handleDefaultError(errorObj);
+              
             }
 
             return Observable.throw(error);
@@ -33,8 +42,47 @@ constructor(public storage:StorageService){}
     }
 
     //funçao auxiliar para erro 403
-    handle403(){
-        this.storage.setLocalUser(null);
+    handle403(errorObj){
+        let alert = this.alertCtrl.create({
+            title: 'Erro' + errorObj.status + ':' + errorObj.error,
+            message: errorObj.message,
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: 'Ok'
+                }
+            ]
+        });
+        alert.present();
+    }
+    
+
+    handle401(){
+        let alert = this.alertCtrl.create({
+            title: 'Erro 401: falha de autenticação',
+            message: 'Email ou senha Inválidos',
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: 'Ok'
+                }
+            ]
+        });
+        alert.present();
+    }
+
+    handleDefaultError(errorObj){
+        let alert = this.alertCtrl.create({
+            title: 'Erro' + errorObj.status + ':' + errorObj.error,
+            message: errorObj.message,
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: 'Ok'
+                }
+            ]
+        });
+        alert.present();
     }
 }
 
