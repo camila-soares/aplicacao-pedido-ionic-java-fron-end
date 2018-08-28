@@ -33,18 +33,22 @@ export class HomePage {
     .subscribe(response => {
       this.auth.successfullLogin(response.headers.get(`Authorization`));
       this.navCtrl.push('CategoriasPage');
-    }, error => {});
+    }, 
+    error => {});
   }
 
   login(){
     this.auth.authenticate(this.creds)
     .subscribe(response => {
       this.auth.successfullLogin(response.headers.get(`Authorization`));
-      this.navCtrl.push('CategoriasPage');
-    }, error => {});
+      this.navCtrl.setRoot('CategoriasPage');
+    }, 
+    error => {});
   }
+
   signup(){
     this.navCtrl.push('SignupPage');
+    
   }
   
 }

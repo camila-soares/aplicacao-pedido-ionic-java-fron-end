@@ -8,7 +8,7 @@ export class ErrorInterceptor implements HttpInterceptor {
 constructor(public storage:StorageService, public alertCtrl: AlertController){}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('passou');
+    
         return next.handle(req)
         .catch((error, caught) => {
 
@@ -20,7 +20,7 @@ constructor(public storage:StorageService, public alertCtrl: AlertController){}
                 errorObj = JSON.parse(errorObj);
             }
 
-            console.log("Erro detectado pelo intercptor");
+            console.log("Erro detectado pelo intercptor:");
             console.log(errorObj);
 
             switch(errorObj.status){
@@ -29,33 +29,26 @@ constructor(public storage:StorageService, public alertCtrl: AlertController){}
                 break;
 
                 case 403:
-                this.handle403(errorObj);
+                this.handle403();
+                break;
+
+                case 422:
+                this.handle422(errorObj);
                 break;
 
                 default:
                 this.handleDefaultError(errorObj);
-              
+                break;
             }
 
-            return Observable.throw(error);
+            return Observable.throw(errorObj);
         }) as any;
     }
 
     //funçao auxiliar para erro 403
-    handle403(errorObj){
-        let alert = this.alertCtrl.create({
-            title: 'Erro' + errorObj.status + ':' + errorObj.error,
-            message: errorObj.message,
-            enableBackdropDismiss: false,
-            buttons: [
-                {
-                    text: 'Ok'
-                }
-            ]
-        });
-        alert.present();
+    handle403(){
+        this.storage.setLocalUser(null);
     }
-    
 
     handle401(){
         let alert = this.alertCtrl.create({
@@ -71,6 +64,21 @@ constructor(public storage:StorageService, public alertCtrl: AlertController){}
         alert.present();
     }
 
+    handle422(errorObj) {
+        let alert = this.alertCtrl.create({
+            title: 'Erro 422: Validação',
+            //message: this.listErrors(errorObj.errors),
+            enableBackdropDismiss: false,
+            buttons: [
+                {
+                    text: 'Ok'
+                }
+            ]
+        });
+        alert.present();
+    }
+
+
     handleDefaultError(errorObj){
         let alert = this.alertCtrl.create({
             title: 'Erro' + errorObj.status + ':' + errorObj.error,
@@ -85,6 +93,7 @@ constructor(public storage:StorageService, public alertCtrl: AlertController){}
         alert.present();
     }
 }
+
 
 export const ErrorInterceptorProvider = {
     provide: HTTP_INTERCEPTORS,

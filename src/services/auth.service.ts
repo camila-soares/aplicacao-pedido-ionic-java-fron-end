@@ -13,7 +13,7 @@ export class AuthService {
     constructor(public http: HttpClient, public storage: StorageService){
 
     }
-    //private readonly newProperty = 'string';
+    
 
     authenticate(creds: CredenciaisDTO){
        return this.http.post(
