@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { FormGroup, FormBuilder, Validator, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { CidadeService } from '../../services/domain/cidade.service';
 import { EstadoService } from '../../services/domain/estado.service';
 import { EstadoDTO } from '../../models/estado.dto';
@@ -33,7 +33,7 @@ export class SignupPage {
           nome: ['Camila', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
           email: ['camila@gmail.com', [Validators.required, Validators.email]],
           tipo: ['1', [Validators.required]],
-          cpfOuCnpj: ['08146639402', [Validators.required]],
+          cpfOuCnpj: ['08146639402', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
           senha: ['1234', [Validators.required]],
           logradouro:['rua rio apa', [Validators.required]],
           numero:['60', [Validators.required]],
