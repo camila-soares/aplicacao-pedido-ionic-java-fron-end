@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageService } from '../../services/Storage.service';
 import { ClienteService } from '../../services/cliente.service';
+import { DomSanitizer } from '../../../node_modules/@angular/platform-browser';
 import { ClienteDTO } from '../../models/cliente.dto';
 import { API_CONFIG } from '../../config/api.config';
 
@@ -18,28 +19,23 @@ cliente: ClienteDTO;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public storage: StorageService,
-              public clienteService: ClienteService) {
+              public clienteService: ClienteService, 
+              public sanitizer: DomSanitizer) {
+              
   }
-
-  ionViewDidLoad() {
+  ionViewDidLoad(){
     let localUser = this.storage.getLocalUser();
     if(localUser && localUser.email){
       this.clienteService.findByEmail(localUser.email)
       .subscribe(response => {
         this.cliente = response;
-        this.getImageIfExists
-        //buscar imagem 
-      }, 
-      error => {
-        if(error.status == 403){
-          this.navCtrl.setRoot('HomePage');
-        }
-      });
-    }
-    else {
-      this.navCtrl.setRoot('HomePage');
+        this.getImageIfExists();
+      },
+    error => {});
     }
   }
+
+  
 
   getImageIfExists() {
     this.clienteService.getImageFromBucket(this.cliente.id)
@@ -48,5 +44,7 @@ cliente: ClienteDTO;
     },
     error => {});
   }
+
+ 
 
 }
