@@ -39,7 +39,6 @@ constructor(public storage:StorageService, public alertCtrl: AlertController){}
 
                 default:
                 this.handleDefaultError(errorObj);
-                break;
             }
 
             return Observable.throw(errorObj);

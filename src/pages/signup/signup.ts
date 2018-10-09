@@ -34,9 +34,9 @@ export class SignupPage {
 
       this.formGroup = this.formBuilder.group({
           nome: ['Camila', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
-          email: ['camila@gmail.com', [Validators.required, Validators.email]],
+          email: ['camila.xoare@gmail.com', [Validators.required, Validators.email]],
           tipo: ['1', [Validators.required]],
-          cpfOuCnpj: ['08146639402', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+          cpfOuCnpj: ['52420012089', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
           senha: ['1234', [Validators.required]],
           logradouro:['rua rio apa', [Validators.required]],
           numero:['60', [Validators.required]],
@@ -46,8 +46,8 @@ export class SignupPage {
           telefone1:['995346681', [Validators.required]],
           telefone2:['', []],
           telefone3:['', []],
-          estadoId:[null, []],
-          cidadeId:[null, []],
+          estadoId:[null, [Validators.required]],
+          cidadeId:[null, [Validators.required]]
       });
   }
 ionViewDidLoad(){
@@ -71,7 +71,8 @@ updateCidades(){
 
   signupUser(){
     this.clienteService.insert(this.formGroup.value)
-    .subscribe(response =>{ this.showInsertOk();
+    .subscribe(response =>{ 
+      this.showInsertOk();
   },
     error => {});
 }

@@ -22,8 +22,8 @@ export class ProdutoDetailPage {
 
   ionViewDidLoad() {
     let produto_id = this.navParams.get('produto_id');
-   this.produtoService.findById(produto_id)
-   .subscribe(response => {
+    this.produtoService.findById(produto_id)
+      .subscribe(response => {
      this.item = response;
      this.getImageUrlIfExists();
    },
