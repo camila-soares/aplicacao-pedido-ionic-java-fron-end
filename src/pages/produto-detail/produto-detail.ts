@@ -14,10 +14,11 @@ export class ProdutoDetailPage {
 
   item: ProdutoDTO;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams, 
-              public produtoService: ProdutoService, 
-              public cartService: CartService) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams, 
+    public produtoService: ProdutoService, 
+    public cartService: CartService) {
   }
 
   ionViewDidLoad() {

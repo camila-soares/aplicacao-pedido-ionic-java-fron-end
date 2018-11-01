@@ -28,10 +28,10 @@ export class StorageService {
     getCart(): Cart {
         let str = localStorage.getItem(STORAGE_KEYS.cart);
         if(str == null ){
-            return null;
+            return JSON.parse(str);
         }
         else {
-            return JSON.parse(str);
+            return null;
         }
     }
 
