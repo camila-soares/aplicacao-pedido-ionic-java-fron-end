@@ -52,8 +52,8 @@ constructor(public storage:StorageService, public alertCtrl: AlertController){}
 
     handle401(){
         let alert = this.alertCtrl.create({
-            title: 'Erro 401: falha de autenticação',
-            message: 'Email ou senha Inválidos',
+            title: ' Email ou senha Inválidos',
+            message: 'falha de autenticação',
             enableBackdropDismiss: false,
             buttons: [
                 {

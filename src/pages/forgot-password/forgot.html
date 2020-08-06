@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>Forgot PassWord</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+    <h3>Sistema de pedidos</h3>
+  <img src="assets/imgs/tela-inicial.png" alt="logo">
+
+<form>
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input [(ngModel)]="credss.email" name="email" type="text"></ion-input>
+    </ion-item>
+      <button ion-button block (click)="forgot()">Enviar</button>
+    </form>
+  </ion-content>

@@ -35,6 +35,16 @@ export class AuthService {
              });
      }
 
+     forgotPassWord(creds: CredenciaisDTO){
+         return this.http.post(
+            `${API_CONFIG.baseUrl}/auth/forgot`, creds,
+            {
+                observe: 'response',
+                responseType:'text'
+            }
+         )
+     }
+
     successfullLogin(authrizationValue : string){
         let tok = authrizationValue.substring(7);
         let user: LocalUser = {

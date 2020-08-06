@@ -4,3 +4,4 @@ export interface ProdutoDTO {
     preco: number;
     imageUrl? :string;
 }
+

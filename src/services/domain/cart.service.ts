@@ -24,7 +24,7 @@ export class CartService {
 
     addProduto(produto: ProdutoDTO) : Cart {
         let cart = this.getCart();
-        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        let position = cart.items.findIndex(x=> x.produto == produto);
         if(position == -1) {
             cart.items.push({quantidade: 1, produto: produto});
         }
@@ -34,7 +34,7 @@ export class CartService {
 
     removeProduto(produto: ProdutoDTO) : Cart {
         let cart = this.getCart();
-        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        let position = cart.items.findIndex(x => x.produto == produto);
         if(position != -1) {
             cart.items.splice(position, 1);
         }
@@ -44,7 +44,7 @@ export class CartService {
 
     increaseQuantity(produto: ProdutoDTO) : Cart {
         let cart = this.getCart();
-        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        let position = cart.items.findIndex(x => x.produto == produto);
         if(position != -1) {
             cart.items[position].quantidade++;
         }
@@ -54,7 +54,7 @@ export class CartService {
 
     decreaseQuantity(produto: ProdutoDTO) : Cart {
         let cart = this.getCart();
-        let position = cart.items.findIndex(x => x.produto.id == produto.id);
+        let position = cart.items.findIndex(x => x.produto == produto);
         if(position != -1) {
             cart.items[position].quantidade--;
             if(cart.items[position].quantidade < 1){

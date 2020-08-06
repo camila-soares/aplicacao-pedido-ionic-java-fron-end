@@ -19,8 +19,10 @@ import { API_CONFIG } from '../../config/api.config';
 export class ProdutosPage {
   
   items : ProdutoDTO[];
+  page: number = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public produtoService: ProdutoService) {
+  constructor(public navCtrl: NavController,
+      public navParams: NavParams, public produtoService: ProdutoService) {
   }
 
   ionViewDidLoad() {
