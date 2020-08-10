@@ -7,16 +7,16 @@
 <form>
   <ion-item>
     <ion-label stacked>Email</ion-label>
-    <ion-input [(ngModel)]="creds.email" name="email" type="text"></ion-input>
+    <ion-input [(ngModel)]="creds.email" id="email" name="email" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
       <ion-label stacked>Senha</ion-label>
-      <ion-input [(ngModel)]="creds.senha" name="senha" type="password"></ion-input>
+      <ion-input [(ngModel)]="creds.senha" id="senha" name="senha" type="password"></ion-input>
     </ion-item>
-    <button ion-button block (click)="login()">ENTRAR</button>
+    <button ion-button block (click)="login()" name="login" >ENTRAR</button>
   </form>
-    <button ion-button block (click)="forgotPassWord()">Esquci minha senha</button>
-    <button ion-button block outline (click)="signup()">Cadastre-se</button>
+    <button ion-button block (click)="forgotPassWord()" name="esqueciSenha">Esquci minha senha</button>
+    <button ion-button block outline (click)="signup()" name="cadastrese">Cadastre-se</button>
 
 </ion-content>
